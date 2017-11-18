@@ -1,0 +1,37 @@
+openweathermap.com API key: 043eb574e379f4640e1c0d7a688a6e33
+http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID={APIKEY}
+
+nytimes.com Article Search API key: a5462e23bdd84d5395587124f3978ddd
+
+var request = new XMLHttpRequest();
+request.open('GET', '/my/url', true);
+
+request.onload = function() {
+  if (request.status >= 200 && request.status < 400) {
+    // Success!
+    var data = JSON.parse(request.responseText);
+  } else {
+    // We reached our target server, but it returned an error
+
+  }
+};
+
+request.onerror = function() {
+  // There was a connection error of some sort
+};
+
+request.send();
+
+var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+url += '?' + $.param({
+  'api-key': "a5462e23bdd84d5395587124f3978ddd",
+  'q': "ufo"
+});
+$.ajax({
+  url: url,
+  method: 'GET',
+}).done(function(result) {
+  console.log(result);
+}).fail(function(err) {
+  throw err;
+});
