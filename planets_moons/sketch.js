@@ -1,49 +1,62 @@
-var planets;
-const padding = 95;
+let padding = 0;
+const WHITE = 240;
 
 function preload() {
-	p_data = loadJSON("planets.json");
+	planets = loadJSON("planets.json");
 }
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
-	background(0);
+	padding = windowWidth / 13 - 3;
+	createCanvas(windowWidth, 1300);
 }
 
 function draw() {
-	translate(70, 50);
-	noLoop();
-	for (let [i, p] of p_data.planets.entries()) {
-		p.position = i + 1;
+	background(20);
+	translate(70, 400);
+	for (let [i, p] of planets.planets.entries()) {
+		drawPlanet(p, i);
+		drawLabel(p, i);
 	}
-	let planets = p_data.planets;
-	planets.sort((a, b) => a.diameter < b.diameter ? 1 : (a. diameter > b.diameter ? -1 : 0));
-	console.log(planets);
-
-	for (p of planets) {
-		drawPlanet(p);
-		drawLabel(p);
-	}
-}
-
-function drawLabel(p) {
+	fill(WHITE);
+	textFont("Rajdhani", 36);
 	textAlign(CENTER);
-	fill(255);
-	text(p.name, (p.position - 1) * padding, 30);
+	text("The planets & moons of the Solar System", windowWidth / 2 - 70, -280);
+
+	if (mouseY > 300) {
+		pos = Math.max(Math.round(mouseX / (windowWidth / 13 - 3)) - 1, 0);
+		textSize(10);
+		noStroke();
+		for (let [j, m] of planets.planets[pos].moons.entries()) {
+			if (j % 2) {
+				textAlign(LEFT);
+				text(m, pos * padding + 10, 68 + j * 8);
+			} else {
+				textAlign(RIGHT);
+				text(m, pos * padding - 10, 68 + j * 8);
+			}
+		}
+	}
 }
 
-function drawPlanet(p) {
-	let i = p.position - 1;
-	fill(100 + 50 * (i % 2));
+function drawLabel(p, i) {
+	textFont("Rajdhani", 12);
+	textAlign(CENTER);
+	fill(WHITE);
+	text(p.name, i * padding, 40);
+}
+
+function drawPlanet(p, i) {
+	fill(150 + 40 * (i % 3));
 	noStroke();
-	let r = Math.max(Math.round(p.diameter / 12756 * 8), 2);
+	let r = Math.max(Math.round(p.diameter / 12742) * 20, 2);
 	ellipse(i * padding, 10 - r / 2, r, r);
+
 	for (let [j, m] of p.moons.entries()) {
-		stroke(200);
+		stroke(WHITE);
 		if (j % 10 === 0 && j > 0) {
-			ellipse(i * padding + 0.5, j * 8 + 45.5, 2, 2);
+			ellipse(i * padding + 0.5, j * 8 + 65.5, 2, 2);
 		} else {
-			point(i * padding, j * 8 + 45);
+			point(i * padding, j * 8 + 65);
 		}
 	}
 }
