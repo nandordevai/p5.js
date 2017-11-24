@@ -176,6 +176,7 @@ function drawScatter() {
 		0
 	);
 	textSize(10);
+	textAlign(LEFT);
 	for (let i = 2; i <= 8; i += 2) {
 		let markerX = i * X_SCALE;
 		stroke(0);
@@ -274,6 +275,7 @@ function drawPlot() {
 	translate(-150, 200);
 	const SCALE = 40;
 
+    // data
 	noStroke();
 	for ([i, e] of earthquakes.entries()) {
 		fill(color(e.color), 10);
@@ -285,6 +287,7 @@ function drawPlot() {
 		);
 	}
 
+	// scale
 	stroke(0);
 	fill(0);
 	line(
@@ -293,6 +296,7 @@ function drawPlot() {
 		10 * SCALE,
 		0
 	);
+    // markers
 	textSize(10);
 	for (let i = 0; i <= 8; i += 2) {
 		let markerX = i * SCALE;
@@ -300,9 +304,10 @@ function drawPlot() {
 		line(markerX, -3, markerX, 3);
 		if (i > 0) {
 			noStroke();
-			text(i, markerX, 20);
+			text(i, markerX - 2, 20);
 		}
 	}
+    // arrow
 	stroke(0);
 	line(10 * SCALE - 3, -3, 10 * SCALE, 0);
 	line(10 * SCALE - 3, 3, 10 * SCALE, 0);
@@ -339,7 +344,7 @@ function drawBar() {
 	fill(0);
 	for (let i = 2; i <= 8; i += 2) {
 		let markerY = - i * SCALE;
-		text(i,	- PADDING_RIGHT * 1.5, markerY);
+		text(i,	- PADDING_RIGHT * 1.5, markerY + 3);
 	}
 
     // bars & legend
