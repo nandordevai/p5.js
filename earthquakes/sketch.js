@@ -25,7 +25,7 @@ const earthquakes = [
 ];
 
 function setup() {
-	createCanvas(windowWidth - 100, windowHeight * 2);
+	createCanvas(windowWidth - 100, windowHeight * 3);
 	// background(200, 200, 200);
 	noLoop();
 }
@@ -45,7 +45,7 @@ function draw() {
 }
 
 function drawTimeline() {
-	translate(-600, 260);
+	translate(-100, 300);
 	const X_SCALE = 60;
 	const M_SCALE = 20;
 	const D_SCALE = 5;
@@ -55,7 +55,7 @@ function drawTimeline() {
 	const scaleWidth = yearMax - yearMin + 3;
 	const scaleHeight = 10;
 
-	translate(50, 100);
+	translate(100, 100);
 
 	textSize(10);
     // magnitude scale
@@ -99,7 +99,7 @@ function drawTimeline() {
 
     // magnitude & depth
 	rectMode(CORNERS);
-	for (let e of earthquakes) {
+	for (let [i, e] of earthquakes.entries()) {
 		noFill();
 		stroke(color(e.color));
 		rect(
@@ -119,6 +119,14 @@ function drawTimeline() {
 			(e.year - yearMin + 1) * X_SCALE,
 			M_SCALE * scaleHeight + e.depth * D_SCALE,
 			8, 8);
+		noStroke();
+		textSize(12);
+		textAlign(RIGHT);
+		text(
+			e.location,
+			-100,
+			i * 30 + 150
+		);
 	}
 
 	// timeline
@@ -158,7 +166,7 @@ function drawScatter() {
 	const Y_SCALE = 10;
 
     // magnitude scale
-	translate(500, -100);
+	translate(-150, 250);
 	stroke(0);
 	fill(0);
 	line(
@@ -201,9 +209,16 @@ function drawScatter() {
 	noStroke();
 	text("depth (km)", -55, 30 * Y_SCALE);
 
-	for (e of earthquakes) {
+	for ([i, e] of earthquakes.entries()) {
 		fill(color(e.color));
 		ellipse(e.magnitude * X_SCALE, e.depth * Y_SCALE, 12, 12);
+		textAlign(LEFT);
+		textSize(12);
+		text(
+			e.location,
+			12 * X_SCALE,
+			30 * i + 100
+		);
 	}
 }
 
@@ -241,21 +256,33 @@ function _drawHouseChart(row, data) {
 }
 
 function drawHouses() {
-	translate(-500, 250);
+	translate(200, 170);
 	const SCALE = 40;
+	textAlign(RIGHT);
 	for (let [i, e] of earthquakes.entries()) {
 		_drawHouseChart(i, e);
+		textSize(12);
+		text(
+			e.location,
+			0,
+			i * 38 + 20
+		);
 	}
 }
 
 function drawPlot() {
-	translate(500, -150);
+	translate(-150, 200);
 	const SCALE = 40;
 
 	noStroke();
-	for (e of earthquakes) {
+	for ([i, e] of earthquakes.entries()) {
 		fill(color(e.color), 10);
 		ellipse(e.magnitude * SCALE, 0, 12, 12);
+		text(
+			e.location,
+			10 * SCALE + PADDING_RIGHT * 4,
+			(i - 1) * 30
+		);
 	}
 
 	stroke(0);
@@ -285,7 +312,8 @@ function drawPlot() {
 
 function drawBar() {
 	const SCALE = 20;
-	translate(100, 350);
+	const PADDING_RIGHT = 50;
+	translate(450, 350);
 	stroke(0);
 
     // x axis
@@ -327,8 +355,8 @@ function drawBar() {
 		);
 		text(
 			e.location,
-			earthquakes.length * (WIDTH + PADDING_RIGHT) + PADDING_RIGHT * 4.5,
-		 	-i * 30
+			earthquakes.length * (WIDTH + PADDING_RIGHT) + PADDING_RIGHT,
+		 	i * 30 - 100
 		);
 	}
 
