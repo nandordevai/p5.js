@@ -54,7 +54,7 @@ function drawPlanet(planet, position) {
 	for (let [i, moon] of planet.moons.entries()) {
 		stroke(WHITE);
 		if (i % 10 === 0 && i > 0) {
-			ellipse(i * padding + 0.5, i * 8 + 65.5, 2, 2);
+			ellipse(position * padding + 0.5, i * 8 + 65.5, 2, 2);
 		} else {
 			point(position * padding, i * 8 + 65);
 		}

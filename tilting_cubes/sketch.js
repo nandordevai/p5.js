@@ -3,7 +3,7 @@ const boxSize = 50;
 const movementScale = 80;
 
 function setup() {
-	createCanvas(windowWidth, windowHeight, WEBGL);
+	createCanvas(windowWidth, windowHeight + 20, WEBGL);
 	for (let i of Array(5).keys()) {
 		for (let j of Array(10).keys()) {
 			boxes.push({
