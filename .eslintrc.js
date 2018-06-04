@@ -14,5 +14,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'comma-dangle': ['error', 'always'],
     'no-unused-vars': 'off',
-  }
+  },
+  globals: {
+    'p5': 'true',
+  },
 }
