@@ -1,0 +1,25 @@
+{
+  "name": "p5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nandordevai/p5.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nandordevai/p5.js/issues"
+  },
+  "homepage": "https://github.com/nandordevai/p5.js#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint-config-p5js": "^1.0.1",
+    "standard": "^11.0.1"
+  }
+}
