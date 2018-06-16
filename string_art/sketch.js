@@ -1,5 +1,6 @@
 const pegsPerSide = 20
 const pegRadius = 5
+const distance = 10
 
 function setup () {
   translate(50, 50)
@@ -19,22 +20,17 @@ function draw () {
 }
 
 function connectEye (pegs) {
-  function getNext (i) {
-    return i + 10 < pegs.length ? pegs[i + 10] : pegs[i + 10 - pegs.length]
-  }
+  const getNext = (i) => i + distance < pegs.length
+    ? pegs[i + distance]
+    : pegs[i + distance - pegs.length]
 
-  function getNeighbour (i) {
-    return i + 1 < pegs.length ? pegs[i + 1] : pegs[0]
-  }
+  const getNeighbour = (i) => i + 1 < pegs.length ? pegs[i + 1] : pegs[0]
 
   translate(width / 2, height / 2)
   pegs.forEach((a, i) => {
-    const red = map(i, 0, pegsPerSide, 100, 200)
-    const green = map(i, 0, pegsPerSide, 0, 255)
-    const blue = map(i, 0, pegsPerSide, 255, 0)
     const b = getNext(i)
     const c = getNeighbour(i)
-    stroke(red, green, blue)
+    stroke(...getColor(i))
     line(...a, ...b)
     line(...a, ...c)
     noStroke()
@@ -76,14 +72,19 @@ function getRightPegs () {
 function connect (a, b) {
   a.reverse()
   a.forEach((aPeg, i) => {
-    const red = map(i, 0, pegsPerSide, 100, 200)
-    const green = map(i, 0, pegsPerSide, 0, 255)
-    const blue = map(i, 0, pegsPerSide, 255, 0)
-    stroke(red, green, blue)
+    stroke(...getColor(i))
     line(...aPeg, ...b[i])
     noStroke()
     fill(160, 160, 160)
     ellipse(...aPeg, pegRadius, pegRadius)
     ellipse(...b[i], pegRadius, pegRadius)
   })
+}
+
+function getColor (i) {
+  return [
+    map(i, 0, pegsPerSide, 100, 200),
+    map(i, 0, pegsPerSide, 0, 255),
+    map(i, 0, pegsPerSide, 255, 0),
+  ]
 }
