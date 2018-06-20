@@ -10,13 +10,13 @@ function setup () {
 
 function draw () {
   noLoop()
-  const top = getTopPegs()
-  const left = getLeftPegs()
+  const top = getTopNails()
+  const left = getLeftNails()
   connect(top, left)
-  const bottom = getBottomPegs()
-  const right = getRightPegs()
+  const bottom = getBottomNails()
+  const right = getRightNails()
   connect(bottom, right)
-  connectEye(getEyePegs())
+  connectEye(getCircleNails())
 }
 
 function connectEye (pegs) {
@@ -39,7 +39,7 @@ function connectEye (pegs) {
   })
 }
 
-function getEyePegs () {
+function getCircleNails () {
   const steps = 24
   const r = 180
   return [...Array(steps).keys()]
@@ -49,22 +49,22 @@ function getEyePegs () {
     ])
 }
 
-function getTopPegs () {
+function getTopNails () {
   return [...Array(pegsPerSide).keys()]
     .map(i => [(i + 1) * (width / pegsPerSide) - pegRadius / 2, pegRadius / 2])
 }
 
-function getBottomPegs () {
+function getBottomNails () {
   return [...Array(pegsPerSide).keys()]
     .map(i => [i * (width / pegsPerSide) - pegRadius / 2, height - pegRadius / 2])
 }
 
-function getLeftPegs () {
+function getLeftNails () {
   return [...Array(pegsPerSide).keys()]
     .map(i => [pegRadius / 2, (i + 1) * (height / pegsPerSide) - pegRadius / 2])
 }
 
-function getRightPegs () {
+function getRightNails () {
   return [...Array(pegsPerSide).keys()]
     .map(i => [width - pegRadius / 2, i * (height / pegsPerSide) - pegRadius / 2])
 }
