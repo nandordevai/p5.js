@@ -3,8 +3,8 @@
 
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
     <style>
         @media screen and (orientation: landscape) {
             body {
@@ -21,58 +21,14 @@
             transform-origin: 0 0;
         }
 
-        body.rotation-90 {
+        body.rotation--landscape-left {
             transform: rotate(90deg) translateY(-177.9%);
         }
 
-        body.rotation90 {
+        body.rotation--landscape-right {
             transform: rotate(-90deg) translateX(-56.25%);
         }
-
     </style>
-	<script type="text/javascript">
-		var yPos = 0;
-		var xPos = 0;
-        window.addEventListener("devicemotion", (event) => {
-            let y = event.accelerationIncludingGravity.y;
-            if (Math.abs(y - yPos) > 0.1) {
-                yPos = y;
-            }
-            let x = event.accelerationIncludingGravity.x;
-            if (Math.abs(x - xPos) > 0.1) {
-                xPos = x;
-            }
-        });
-        window.addEventListener("mousemove", (event) => {
-            yPos = (event.screenY - window.innerHeight / 2) / -80;
-            xPos = (event.screenX - window.innerWidth / 2) / 100;
-        });
-
-        function deviceOrientation() {
-          var body = document.body;
-          switch(window.orientation) {
-            case 90:
-              body.classList = '';
-              body.classList.add('rotation90');
-              break;
-            case -90:
-              body.classList = '';
-              body.classList.add('rotation-90');
-              break;
-            default:
-              body.classList = '';
-              body.classList.add('portrait');
-              break;
-          }
-        }
-        window.addEventListener('orientationchange', deviceOrientation);
-        deviceOrientation();
-
-    </script>
-    <script src="/p5.min.js"></script>
-    <script src="/addons/p5.dom.min.js"></script>
-    <script src="/addons/p5.sound.min.js"></script>
-    <script src="sketch.js"></script>
     <style media="screen">
         body {
             margin: 0;
@@ -81,6 +37,9 @@
 </head>
 
 <body>
+    <script src="/p5.min.js"></script>
+    <script src="/addons/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
 </body>
 
 </html>
